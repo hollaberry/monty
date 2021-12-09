@@ -37,7 +37,7 @@ unsigned int line_number = 0;
 char *buffer = NULL;
 char *vstack = NULL;
 
-while ((getline(&buff, &len, op_file) != -1))
+while (getline(&buff, &len, op_file) != -1)
 {
 line_number++;
 buffer = strtok(buff, DELIM);

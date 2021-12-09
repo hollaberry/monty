@@ -57,4 +57,7 @@ void op_sub(stack_t **stack, unsigned int line_number);
 void op_pop(stack_t **stack, unsigned int line_number);
 void op_add(stack_t **stack, unsigned int line_number);
 
+int alloc_error(char *buffer);
+ssize_t _getdelim(char **buf, size_t *bufsiz, int delimiter, FILE *fp);
+ssize_t _getline(char **buf, size_t *bufsiz, FILE *fp);
 #endif
