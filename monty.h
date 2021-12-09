@@ -1,7 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define DELIM " \t\r\n"
+#include <stddef.h>
 
 #include <stdio.h>
 #include <ctype.h>
@@ -48,42 +48,58 @@ char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct global_s - opcode and its function
- * @num: the opcode
- * @headstack: function to handle the opcode
- * @count:each line count
- * @file:file
- * @gbuff: buffer
- */
-typedef struct global_s
-{
-char *num;
-char *gbuff;
-stack_t **headstack;
-unsigned int count;
-File *file;
-} global_t
 
-extern global_t global;
-typedef void (*instruct_func)(stack_t **stack, unsigned int count);
-stack_t *add_dnodeint(stack_t **head, const int n);
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-int delete_node_index(stack_t **head, unsigned int index);
-void free_stack_t(stack_t **head);
-void error_fun(stack_t **headstack);
-void free_list(stack_t *head);
-void get_func(char *op);
-void openfile(char *filename);
+#define INSTRUCTIONS { \
+{"push", push},
+{"pall", _pall},					\
+{"pint", _pint},			\
+{"pop", _pop},	\
+{"swap", _swap},			\
+{"nop", _nop},	\
+{"div", _div},					\
+{"mul", _mul},			\
+{"add", _add},	\
+{"sub", _sub},			\
+{"mod", mod},			\
+{"pchar", _pchar},		\
+{"pstr", _pstr},	\
+{"rotl", rotl},			\
+{"rotr", rotr},	\
+{NULL, NULL}			\
+	}
+/**
+ * struct help - argument fo rthe current opcode
+ * @data_struct: stack mode
+ * @argument: The arguments of the string
+ *
+ */
+typedef struct help
+{
+int data_struct;
+char *argument;
+} help;
+help global;
+
+extern int status;
+
+stack_t *add_node(stack_t **head, const int n);
+stack_t *queue_node(stack_t **head, const int n);
+void free_stack(stack_t *head);
 int is_digit(char *str);
-void _push(stack_t **stack, unsigned int count);
+void push(stack_t **stack, unsigned int count);
 void _pall(stack_t **stack, unsigned int count);
 void _pint(stack_t **stack, unsigned int count);
+void _swap(stack_t **stack, unsigned int count);
 void _pop(stack_t **stack, unsigned int count);
 void _add(stack_t **stack, unsigned int count);
 void _sub(stack_t **stack, unsigned int count);
 void _mul(stack_t **stack, unsigned int count);
 void _div(stack_t **stack, unsigned int count);
-void exit_op(void);
+void _nop(stack_t **stack, unsigned int count);
+void opcode(stack_t **Stack, char *str, unsigned int line_cnt);
+void _pchar(stack_t **stack, unsigned int line_cnt);
+void _pstr(stack_t **stack, unsigned int line_cnt);
+void rotr(stack_t **stack, unsigned int line_cnt);
+void rotl(stack_t **stack, unsigned int line_count);
 
 #endif

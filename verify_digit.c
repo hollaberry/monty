@@ -16,7 +16,7 @@ if (*str == '-')
 str++;
 
 for (i = 0 ; str[i]; i++)
-if (str[i] < 48 || s[i] > 57)
+if (str[i] < 48 || str[i] > 57)
 return (1);
 
 return (0);

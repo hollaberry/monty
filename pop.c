@@ -4,14 +4,21 @@
  * @stack: pointer to stack
  * @count: current line_number
  */
-void _pop(stack_t **t, unsigned int count)
+void _pop(stack_t **stack, unsigned int count)
 {
+stack_t *tmp = NULL;
+
 if (!stack || !(*stack))
 {
-dprintf(2, "L%d: can't pop an empty stack\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: can't pop an empty stack\n", count);
+status = EXIT_FAILURE;
+return;
 }
-delete_node_index(stack, 0);
+tmp = (*stack)->next;
+free(*stack);
+*stack = tmp;
+if (!*stack)
+return; /* prevents errors cause next line might assign a NULL */
+(*stack)->prev = NULL;
 }
 

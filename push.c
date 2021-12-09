@@ -6,16 +6,32 @@
  *
  * Return: void
  */
-void _push(stack_t **stack, unsigned int count)
+void push(stack_t **stack, unsigned int count)
 {
-int n;
+  
+char *n = global.argument;
 
-if ((is_digit(global.num)) == 1)
+if ((is_digit(n)) == 0)
 {
-dprintf(2, "L%d: usage: push integer\n", count);
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: usage: push integer\n", count);
+status = EXIT_FAILURE;
+return;
 }
 
-n = atoi(global.num);
-add_dnodeint(stack, n);
+if (global.data_struct == 1)
+{
+if (!add_node(stack, atoi(global.argument)))
+{
+return;
+status = EXIT_FAILURE;
+}
+}
+else
+{
+if (!queue_node(stack, atoi(global.argument)))
+{
+return;
+status = EXIT_FAILURE;
+}
+}
 }

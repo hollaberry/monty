@@ -6,13 +6,12 @@
  */
 void _pint(stack_t **stack, unsigned int count)
 {
-stack_t *temp = *stack;
 if (!stack || !(*stack))
 {
 
-fprint(stderr, "L%d: can't pint, stack empty\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: can't pint, stack empty\n", count);
+status = EXIT_FAILURE;
+return;
 }
-printf("%d\n", temp->);
+ printf("%d\n", (*stack)->n);
 }

@@ -6,23 +6,20 @@
  */
 void _swap(stack_t **stack, unsigned int count)
 {
-stack_t *temp = *stack, *temp2, *temp3;
-int cnt = 0;
+stack_t *tmp = NULL;
+int tmp_n = 0;
 
-while (temp)
-temp = temp->next, cnt++;
-
-if (cnt < 2 || !stack || !(*stack) || !(*stack)->next)
+if (!stack || !*stack || !((*stack)->next))
 {
-dprintf(2, "L%d: can't swap, stack too short\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: can't swap, stack too short\n", count);
+status = EXIT_FAILURE;
+return;
 }
-temp = temp3 = *stack;
-temp2 = temp->next;
+tmp = *stack;
+tmp_n = tmp->n;
+tmp->n = tmp_n;
 
-temp->next = temp2->next, temp->prev = temp2;
-temp2->next = temp3, temp2->prev = temp3->prev;
+tmp->n = tmp->next->n;
+tmp->next->n = tmp_n;
 
-*stack = temp2;
 }

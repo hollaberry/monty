@@ -18,21 +18,19 @@ void _nop(stack_t **stack, unsigned int count)
  */
 void _sub(stack_t **stack, unsigned int count)
 {
-stack_t *temp = *stack;
-int cnt = 0, tmpn;
 
-while (temp)
-temp = temp->next, cnt++;
+int result;
 
-if (cnt < 2)
+if (!stack || !*stack || !((*stack)->next))
 {
-dprintf(2, "L%d: can't sub, stack too short\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: can't sub, stack too short\n", line_cnt);
+status = EXIT_FAILURE;
+return;
 }
-tmpn = (*stack)->n;
-delete_node_index(stack, 0);
-(*stack)->n -= tmpn;
+
+result = ((*stack)->next->n) - ((*stack)->n);
+_pop(stack, line_cnt);/*For top node*/
+(*stack)->n = result;
 }
 
 /**
@@ -43,31 +41,25 @@ delete_node_index(stack, 0);
  */
 void _div(stack_t **stack, unsigned int count)
 {
-stack_t *temp = *stack;
-int cnt = 0, tmpn;
+int result;
 
-while (temp)
-temp = temp->next, cnt++;
-if (cnt < 2)
+if (!stack || !*stack || !((*stack)->next))
 {
-dprintf(2, "L%d: can't div, stack too short\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: can't div, stack too short\n", count);
+status = EXIT_FAILURE;
+return;
 }
-tmpn = (*stack)->n;
-delete_node_index(stack, 0);
-
-if (tmpn == 0)
+if (((*stack)->n) == 0)
 {
-dprintf(2, "L%d: division by zero\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: division by zero\n", count);
+status = EXIT_FAILURE;
+return;
 }
 
-(*stack)->n /= tmpn;
-
+result = ((*stack)->next->n) / ((*stack)->n);
+pop(stack,count);/*For top node*/
+(*stack)->n = result;
 }
-
 
 /**
  * _mul - multiplies the second top element of the stack with the top element
@@ -78,19 +70,16 @@ exit(EXIT_FAILURE);
 
 void _mul(stack_t **stack, unsigned int count)
 {
-stack_t *temp = *stack;
-int cnt = 0, tmpn;
+int result;
 
-while (temp)
-temp = temp->next, cnt++;
 
-if (cnt < 2)
+if (!stack || !*stack || !((*stack)->next))
 {
-dprintf(2, "L%d: can't mul, stack too short\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%d: can't mul, stack too short\n", count);
+status = EXIT_FAILURE;
+return;
 }
-tmpn = (*stack)->n;
-delete_node_index(stack, 0);
-(*stack)-> *= tmpn;
+result = ((*stack)->next->n) * ((*stack)->n);
+pop(stack, line_cnt);/*For top node*/
+(*stack)->n = result;
 }

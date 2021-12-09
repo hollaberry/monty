@@ -14,7 +14,7 @@ temp = temp->next, cnt++;
 
 if (cnt < 2)
 {
-dprintf(2, "L%d: can't add, stack too short\n", count);
+fprintf(stderr, "L%d: can't add, stack too short\n", count);
 exit_op();
 exit(EXIT_FAILURE);
 }
