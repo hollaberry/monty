@@ -8,7 +8,7 @@
 stack_t *queue_node(stack_t **stack, const int n)
 {
 stack_t *new = malloc(sizeof(stack_t));
-stack_t current = *stack;
+stack_t *current = *stack;
 
 if (!new)
 {
@@ -78,12 +78,12 @@ return (newnode);
  */
 void free_stack(stack_t *head)
 {
-stack_t *tmp = stack;
+stack_t *tmp = head;
 stack_t *next;
   
-if (stack)
+if (head)
 {
-next = stack->next;
+next = head->next;
 while (tmp)
 {
 free(tmp);

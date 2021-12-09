@@ -2,19 +2,12 @@
 #define MONTY_H
 
 #include <stddef.h>
-
 #include <stdio.h>
-#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <limits.h>
-
-
-
+#include <errno.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -49,23 +42,23 @@ void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 
-#define INSTRUCTIONS { \
-{"push", push},
-{"pall", _pall},					\
-{"pint", _pint},			\
-{"pop", _pop},	\
-{"swap", _swap},			\
-{"nop", _nop},	\
-{"div", _div},					\
-{"mul", _mul},			\
-{"add", _add},	\
-{"sub", _sub},			\
-{"mod", mod},			\
-{"pchar", _pchar},		\
-{"pstr", _pstr},	\
-{"rotl", rotl},			\
-{"rotr", rotr},	\
-{NULL, NULL}			\
+#define INSTRUCTIONS {\
+		{"push", push},\
+		{"pall", pall},\
+		{"pint", pint},\
+		{"pop", pop},\
+		{"swap", swap},\
+		{"nop", nop},\
+		{"div", _div},\
+		{"mul", _mul},\
+		{"add", _add},\
+		{"sub", _sub},\
+		{"mod", mod},\
+		{"pchar", pchar},\
+		{"pstr", pstr},\
+		{"rotl", rotl},\
+		{"rotr", rotr},\
+		{NULL, NULL} \
 	}
 /**
  * struct help - argument fo rthe current opcode
@@ -87,19 +80,24 @@ stack_t *queue_node(stack_t **head, const int n);
 void free_stack(stack_t *head);
 int is_digit(char *str);
 void push(stack_t **stack, unsigned int count);
-void _pall(stack_t **stack, unsigned int count);
-void _pint(stack_t **stack, unsigned int count);
-void _swap(stack_t **stack, unsigned int count);
-void _pop(stack_t **stack, unsigned int count);
+void pall(stack_t **stack, unsigned int count);
+void pint(stack_t **stack, unsigned int count);
+void swap(stack_t **stack, unsigned int count);
+void pop(stack_t **stack, unsigned int count);
 void _add(stack_t **stack, unsigned int count);
 void _sub(stack_t **stack, unsigned int count);
 void _mul(stack_t **stack, unsigned int count);
 void _div(stack_t **stack, unsigned int count);
-void _nop(stack_t **stack, unsigned int count);
+void nop(stack_t **stack, unsigned int count);
 void opcode(stack_t **Stack, char *str, unsigned int line_cnt);
-void _pchar(stack_t **stack, unsigned int line_cnt);
-void _pstr(stack_t **stack, unsigned int line_cnt);
+void pchar(stack_t **stack, unsigned int line_cnt);
+void pstr(stack_t **stack, unsigned int line_cnt);
 void rotr(stack_t **stack, unsigned int line_cnt);
 void rotl(stack_t **stack, unsigned int line_count);
+void mod(stack_t **stack, unsigned int line_cnt);
 
+
+ssize_t _getline(char **buf, size_t *bufsiz, FILE *fp);
+ssize_t _getdelim(char **buf, size_t *bufsiz, int delimiter, FILE *fp);
+int _isascii(int c);
 #endif

@@ -1,10 +1,10 @@
 #include "monty.h"
 /**
- * _nop - doesn't do anything
+ * nop - doesn't do anything
  *@stack: Pointer to head of stack (or queue)
  *@count: Current line number
  */
-void _nop(stack_t **stack, unsigned int count)
+void nop(stack_t **stack, unsigned int count)
 {
 (void) stack;
 (void) count;
@@ -23,13 +23,13 @@ int result;
 
 if (!stack || !*stack || !((*stack)->next))
 {
-fprintf(stderr, "L%d: can't sub, stack too short\n", line_cnt);
+fprintf(stderr, "L%d: can't sub, stack too short\n", count);
 status = EXIT_FAILURE;
 return;
 }
 
 result = ((*stack)->next->n) - ((*stack)->n);
-_pop(stack, line_cnt);/*For top node*/
+pop(stack, count);/*For top node*/
 (*stack)->n = result;
 }
 
@@ -80,6 +80,6 @@ status = EXIT_FAILURE;
 return;
 }
 result = ((*stack)->next->n) * ((*stack)->n);
-pop(stack, line_cnt);/*For top node*/
+pop(stack, count);/*For top node*/
 (*stack)->n = result;
 }

@@ -4,14 +4,14 @@
 #include <string.h>
 #include "monty.h"
 /**
- * _isascii - check if ascii is true
- * @c: int to check
- * Return: 0 if fails or number if true
+ *_isascii - function to check if c is ascii
+ * @c: intger
+ * Return: c for success and 0 for failure
  */
-int _isascii(int c)
+int _isascii
 {
-return ((c <= 127) && (c >= 0));
-}
+  return ((c <= 127) && (c >= 0))
+    }
 /**
  * pchar - prints the int at the top of the stack as char
  * @stack: stack given by main
@@ -27,7 +27,7 @@ fprintf(stderr, "L%d: can't pchar, stack empty\n", line_cnt);
 status = EXIT_FAILURE;
 return;
 }
-if (_isascii((*stack)->n) == 0)
+if (isascii((*stack)->n) == 0)
 {
 fprintf(stderr, "L%d: can't pchar, value out of range\n", line_cnt);
 status = EXIT_FAILURE;

@@ -1,10 +1,10 @@
 #include "monty.h"
 /**
- * _pint - function to print the top value  a stack
+ * pint - function to print the top value  a stack
  * @stack: stackpointer
  * @count: num of items in stack
  */
-void _pint(stack_t **stack, unsigned int count)
+void pint(stack_t **stack, unsigned int count)
 {
 if (!stack || !(*stack))
 {

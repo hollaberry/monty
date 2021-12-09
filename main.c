@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "monty.h"
 
@@ -38,6 +38,7 @@ int main(int argc, char **argv)
 {
 FILE *file;
 size_t buf_len = 0;
+int get = 0;
 char *buffer = NULL;
 char *str = NULL;
 stack_t *stack = NULL;
@@ -51,11 +52,12 @@ file = fopen(argv[1], "r");
 
 if (!file)
 file_error(argv[1]);
-
-while (getline(&buffer, &buf_len, file) != -1)
+get = _getline(&buffer, &buf_len, file);
+while (get != -1)
 {
 if (status)
 break;
+
 if (*buffer == '\n')
 {
 line_cnt++;

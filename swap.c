@@ -1,10 +1,10 @@
 #include "monty.h"
 /**
- * _swap - swaps the top two elements of the stack
+ * swap - swaps the top two elements of the stack
  * @stack: Pointer to head of stack (or queue)
  * @count: current line number
  */
-void _swap(stack_t **stack, unsigned int count)
+void swap(stack_t **stack, unsigned int count)
 {
 stack_t *tmp = NULL;
 int tmp_n = 0;

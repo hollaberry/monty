@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
- * _push - push element into the stack
+ * push - push element into the stack
  * @stack: stack given by main
  * @count: amount of lines
  *

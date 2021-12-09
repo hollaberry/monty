@@ -6,20 +6,17 @@
  */
 void _add(stack_t **stack, unsigned int count)
 {
-stack_t *temp = *stack;
-int cnt = 0, tmpn;
+int result;
 
-while (temp)
-temp = temp->next, cnt++;
 
-if (cnt < 2)
+if (!stack || !*stack || !((*stack)->next))
 {
 fprintf(stderr, "L%d: can't add, stack too short\n", count);
-exit_op();
-exit(EXIT_FAILURE);
+status = EXIT_FAILURE;
+return;
 }
 
-tmpn = (*stack)->n;
-delete_node_index(stack, 0);
-(*stack)->n += tmpn;
+result = ((*stack)->next->n) + ((*stack)->n);
+pop(stack, count);
+(*stack)->n = result;
 }
