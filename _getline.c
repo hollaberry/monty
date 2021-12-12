@@ -11,7 +11,7 @@ char *ptr, *eptr;
 
 if (*buf == NULL || *bufsiz == 0) {
 *bufsiz = BUFSIZ;
-*buf = malloc(*bufsiz);
+buf = malloc(*bufsiz);
 if (*buf == NULL)
 return (-1);
 }
@@ -34,7 +34,7 @@ char *nbuf;
 size_t nbufsiz = *bufsiz * 2;
 ssize_t d = ptr - *buf;
 nbuf = realloc(*buf, nbufsiz);
-if ((nbuf == NULL)
+if ((*nbuf == NULL)
 return (-1);
 *buf = nbuf;
 *bufsiz = nbufsiz;
