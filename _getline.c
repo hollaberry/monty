@@ -12,7 +12,7 @@ char *ptr, *eptr;
 if (*buf == NULL || *bufsiz == 0) {
 *bufsiz = BUFSIZ;
 
-if (*buf = malloc(*bufsiz) == NULL)
+if ((*buf = malloc(*bufsiz)) == NULL)
 return (-1);
 }
 
