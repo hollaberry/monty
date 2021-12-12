@@ -33,8 +33,8 @@ if (ptr + 2 >= eptr) {
 char *nbuf;
 size_t nbufsiz = *bufsiz * 2;
 ssize_t d = ptr - *buf;
-nbuf = realloc(*buf, nbufsiz);
-if ((nbuf == NULL)
+
+if ((nbuf =realloc(*buf, nbufsiz)) == NULL)
 return (-1);
 *buf = nbuf;
 *bufsiz = nbufsiz;
